@@ -65,3 +65,8 @@ gcp/modules/workspace_deployment/fslakehouse-9b0f57986dbf.json
 gcp/modules/service_account/*.json
 **/service_account/*.json
 .cursorignore
+
+# Terraform plan output files
+terraform-plan-output.txt
+tfplan.out
+tfplan

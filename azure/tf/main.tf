@@ -76,6 +76,7 @@ module "hub_catalog" {
   force_destroy         = var.sat_force_destroy
   databricks_account_id = var.databricks_account_id
   is_default_namespace  = true
+  storage_account_name  = var.sat_configuration.catalog_storage_account_name
 
   providers = {
     databricks.workspace = databricks.hub

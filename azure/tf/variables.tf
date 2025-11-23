@@ -42,11 +42,11 @@ variable "hub_allowed_urls" {
 variable "spoke_config" {
   type = map(object(
     {
-      resource_suffix          = string
-      cidr                     = string
-      tags                     = map(string)
-      is_unity_catalog_enabled = optional(bool, true)
-      storage_account_name     = optional(string, null)
+      resource_suffix             = string
+      cidr                        = string
+      tags                        = map(string)
+      is_unity_catalog_enabled    = optional(bool, true)
+      catalog_storage_account_name = optional(string, null)
     }
   ))
   description = "(Required) List of spoke configurations"
@@ -71,12 +71,13 @@ variable "subscription_id" {
 
 variable "sat_configuration" {
   type = object({
-    enabled           = optional(bool, true)
-    schema_name       = optional(string, "sat")
-    catalog_name      = optional(string, "sat")
-    resource_suffix   = optional(string, "null")
-    proxies           = optional(map(any), {})
-    run_on_serverless = optional(bool, false)
+    enabled                      = optional(bool, true)
+    schema_name                  = optional(string, "sat")
+    catalog_name                 = optional(string, "sat")
+    resource_suffix              = optional(string, "null")
+    proxies                      = optional(map(any), {})
+    run_on_serverless            = optional(bool, false)
+    catalog_storage_account_name = optional(string, null)
   })
   default     = {}
   description = "(Optional) Configuration for the SAT customization"
