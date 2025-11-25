@@ -54,7 +54,7 @@ module "hub" {
   #options
   is_kms_enabled           = true
   is_firewall_enabled      = true
-  is_unity_catalog_enabled = true
+  is_unity_catalog_enabled = false
 }
 
 module "hub_catalog" {

@@ -118,18 +118,19 @@ resource "time_sleep" "workspace_wait" {
 }
 
 # Grant admin access to the provisioner account to the workspace, used for downstream workspace provider
-resource "databricks_mws_permission_assignment" "admin" {
-  workspace_id = time_sleep.workspace_wait.triggers.workspace_id
-  principal_id = var.provisioner_principal_id
-  permissions  = ["ADMIN"]
-}
+# Commented out because Permission assignment APIs are not available for this workspace type/region
+# resource "databricks_mws_permission_assignment" "admin" {
+#   workspace_id = time_sleep.workspace_wait.triggers.workspace_id
+#   principal_id = var.provisioner_principal_id
+#   permissions  = ["ADMIN"]
+# }
 
 # This resource is used to output the workspace URL of the workspace AFTER the provisioner account has been granted admin
 # This removes the need to use depends_on in downstream modules that use this workspace in their aliased provider.
 resource "null_resource" "admin_wait" {
   triggers = {
     workspace_url = azurerm_databricks_workspace.webauth.workspace_url
-    workspace_id  = databricks_mws_permission_assignment.admin.workspace_id
+    workspace_id  = time_sleep.workspace_wait.triggers.workspace_id
   }
 }
 
